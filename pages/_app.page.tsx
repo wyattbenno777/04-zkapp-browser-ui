@@ -66,14 +66,9 @@ export default function App() {
         await zkappWorkerClient.initZkappInstance(zkappPublicKey);
 
         console.log('getting zkApp state...');
-        const res2 = await state.zkappWorkerClient!.fetchAccount({ publicKey: state.publicKey! })
-        const accountExists = res2.error == null;
-        console.log('Check bug2');
-        console.log(res2);
-        if (accountExists) {
-          const currentNum = await zkappWorkerClient.getNum();
-          console.log('current state:', currentNum.toString());
-        }
+        await zkappWorkerClient.fetchAccount({ publicKey: zkappPublicKey })
+        const currentNum = await zkappWorkerClient.getNum();
+        console.log('current state:', currentNum.toString());
 
         setState({
             ...state,
@@ -142,22 +137,17 @@ export default function App() {
     setState({ ...state, creatingTransaction: false });
   }
 
+
   // -------------------------------------------------------
   // Refresh the current state
 
   const onRefreshCurrentNum = async () => {
     console.log('getting zkApp state...');
-    const res = await state.zkappWorkerClient!.fetchAccount({ publicKey: state.publicKey! })
-    const accountExists = res.error == null;
-    console.log('Check bug');
-    console.log(res);
-    if (accountExists) {
-      const currentNum = await state.zkappWorkerClient!.getNum();
-      console.log('current state:', currentNum.toString());
+    await state.zkappWorkerClient!.fetchAccount({ publicKey: state.zkappPublicKey! })
+    const currentNum = await state.zkappWorkerClient!.getNum();
+    console.log('current state:', currentNum.toString());
 
-      setState({ ...state, currentNum });
-    }
-
+    setState({ ...state, currentNum });
   }
 
   // -------------------------------------------------------
