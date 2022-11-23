@@ -66,9 +66,14 @@ export default function App() {
         await zkappWorkerClient.initZkappInstance(zkappPublicKey);
 
         console.log('getting zkApp state...');
-        await zkappWorkerClient.fetchAccount({ publicKey: zkappPublicKey })
-        const currentNum = await zkappWorkerClient.getNum();
-        console.log('current state:', currentNum.toString());
+        const res2 = await state.zkappWorkerClient!.fetchAccount({ publicKey: state.publicKey! })
+        const accountExists = res2.error == null;
+        console.log('Check bug2');
+        console.log(res2);
+        if (accountExists) {
+          const currentNum = await zkappWorkerClient.getNum();
+          console.log('current state:', currentNum.toString());
+        }
 
         setState({
             ...state,
