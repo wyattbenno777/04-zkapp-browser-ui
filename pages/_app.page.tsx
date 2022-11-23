@@ -142,9 +142,10 @@ export default function App() {
 
   const onRefreshCurrentNum = async () => {
     console.log('getting zkApp state...');
-    await state.zkappWorkerClient!.fetchAccount({ publicKey: state.zkappPublicKey! })
     const res = await state.zkappWorkerClient!.fetchAccount({ publicKey: state.publicKey! })
     const accountExists = res.error == null;
+    console.log('Check bug');
+    console.log(res);
     if (accountExists) {
       const currentNum = await state.zkappWorkerClient!.getNum();
       console.log('current state:', currentNum.toString());
