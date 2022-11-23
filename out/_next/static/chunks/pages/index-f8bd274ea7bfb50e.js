@@ -582,7 +582,7 @@ function Home() {
             await snarkyjs__WEBPACK_IMPORTED_MODULE_4__/* .isReady */ .DK;
             const { Add  } = await __webpack_require__.e(/* import() */ 336).then(__webpack_require__.bind(__webpack_require__, 9336));
             // Update this to use the address (public key) for your zkApp account
-            // To try it out, you can try this address for an example "Add" smart contract that we've deployed to 
+            // To try it out, you can try this address for an example "Add" smart contract that we've deployed to
             // Berkeley Testnet B62qqkb7hD1We6gEfrcqosKt9C398VLp1WXeTo1i9boPoqF7B1LxHg4
             const zkAppAddress = "";
             // This should be removed once the zkAppAddress is updated.
