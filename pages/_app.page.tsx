@@ -137,17 +137,21 @@ export default function App() {
     setState({ ...state, creatingTransaction: false });
   }
 
-
   // -------------------------------------------------------
   // Refresh the current state
 
   const onRefreshCurrentNum = async () => {
     console.log('getting zkApp state...');
     await state.zkappWorkerClient!.fetchAccount({ publicKey: state.zkappPublicKey! })
-    const currentNum = await state.zkappWorkerClient!.getNum();
-    console.log('current state:', currentNum.toString());
+    const res = await state.zkappWorkerClient!.fetchAccount({ publicKey: state.publicKey! })
+    const accountExists = res.error == null;
+    if (accountExists) {
+      const currentNum = await state.zkappWorkerClient!.getNum();
+      console.log('current state:', currentNum.toString());
 
-    setState({ ...state, currentNum });
+      setState({ ...state, currentNum });
+    }
+
   }
 
   // -------------------------------------------------------
